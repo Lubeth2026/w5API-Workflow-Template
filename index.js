@@ -93,13 +93,14 @@ async function main() {
     console.log(user8);
 
     btn.addEventListener("click", async () => {
-      const picURL = "https://dog.ceo/api/breeds/image/random";
-      const picOptions = { method: "GET" };
+    const picURL = "https://dog.ceo/api/breeds/image/random";
+    const picOptions = { method: "GET" };
 
-      const pic = await fetchData(picURL, picOptions);
-      console.log(pic);
-      renderImg(pic.message);
+    const pic = await fetchData(picURL, picOptions);
+    console.log(pic);
+    renderImg(pic.message);
     });
+    
   } catch (error) {}
   console.log("Server is Running...");
 }
