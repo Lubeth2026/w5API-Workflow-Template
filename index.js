@@ -40,6 +40,23 @@ async function starWars(id) {
 }
 
 
+//POST Endpoint Request Function//
+//Typed 5th//
+async function getJSON(userid) {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts/" +userid);
+    if(!res.ok) {
+      throw new Error("Something happened getting your info");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+
+  }
+}
+
+
 //Renders content on the page//
 //Render does not have to be "Async Function" it can just be a Function//
 //Typed 4th//
@@ -58,6 +75,12 @@ async function main() {
     const obiWanKenobi = await starWars(10);
     console.log(obiWanKenobi);
 
+    const user4 = await getJSON(4)
+    console.log(user4)
+
+    const user8 = await getJSON(8);
+    console.log(user8);
+
    
       const picURL = "https://dog.ceo/api/breeds/image/random";
       const picOptions = { method: "GET" };
@@ -65,7 +88,9 @@ async function main() {
       const pic = await fetchData(picURL, picOptions);
       console.log(pic.message);
      
-  } catch (error) {}
+  } catch (error) {
+
+  }
   console.log("Server is Running...");
 }
 main();
