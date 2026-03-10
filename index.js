@@ -40,19 +40,19 @@ async function starWars(id) {
 
 //POST Endpoint Request Function//
 //Typed 5th//
-async function getJSON(userid) {
-  try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts/" +userid);
-    if(!res.ok) {
-      throw new Error("Something happened getting your info");
-    }
+//async function getJSON(userid) {
+//  try {
+//    const res = await fetch("https://jsonplaceholder.typicode.com/posts/" +userid);
+//    if(!res.ok) {
+//      throw new Error("Something happened getting your info");
+//    }
 
-    const data = await res.json();
-    return data;
-  } catch (error) {
+//    const data = await res.json();
+//    return data;
+//  } catch (error) {
 
-  }
-}
+//  }
+//}
 
 
 //Renders content on the page//
@@ -76,6 +76,19 @@ function renderImg(src) {
   main2.appendChild(img);
 }
 
+
+//POST EXAMPLE RENDER FUNCTION//
+function renderPost(postData){
+    const message = document.getElementById("message");
+    const title = document.createElement("h2");
+    const body = document.createElement("p");
+    const id = document.createElement("p");
+    title.textContent = postData.title
+    body.textContent = postData.body
+    id.textContent = postData.id
+}
+
+
 //Main Function Runs all your calls//
 //Typed 2nd//
 async function main() {
@@ -86,21 +99,48 @@ async function main() {
     const obiWanKenobi = await starWars(10);
     console.log(obiWanKenobi);
 
-    const user4 = await getJSON(4);
-    console.log(user4);
+    //POST Endpoint Request Function//
+    //Typed 5th//
+    //Sending a message data with a post request//
+    const postData = {
+      userid: 3,
+      id: 22,
+      title: "dolor sint quo a velit explicabo quia nam",
+      body: "eos qui et ipsum ipsam suscipit aut\nsed omnis non odio\nexpedita earum mollitia molestiae aut atque rem suscipit\nnam impedit esse",
+    };
+    JSON.stringify(postData);
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(postData),
+    };
+    const jsonDataFromAPI = await fetch(
+      "https://jsonplaceholder.typicode.com/posts",
+      options,
+    );
+    console.log(jsonDataFromAPI);
+    console.log(options);
+    //End of POST example//
+    
+    //Weather Array Output//
+    const weatherConfig = {
+      baseurl: "https://api.open-mateo.com/v1/forecast",
+      latitude: "40.442",
+      longitude: "-79.995",
+    };
 
-    const user8 = await getJSON(8);
-    console.log(user8);
+    const config = Object.entries(weatherConfig);
+    console.log(config);
+    //End of Weather Array Outout//
 
     btn.addEventListener("click", async () => {
-    const picURL = "https://dog.ceo/api/breeds/image/random";
-    const picOptions = { method: "GET" };
+      const picURL = "https://dog.ceo/api/breeds/image/random";
+      const picOptions = { method: "GET" };
 
-    const pic = await fetchData(picURL, picOptions);
-    console.log(pic);
-    renderImg(pic.message);
+      const pic = await fetchData(picURL, picOptions);
+      console.log(pic);
+      renderImg(pic.message);
     });
-    
   } catch (error) {}
   console.log("Server is Running...");
 }
